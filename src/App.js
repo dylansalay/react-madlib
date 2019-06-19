@@ -4,34 +4,33 @@ import './App.css';
 import Input from './Input.js';
 import Output from './Output.js';
 
-class App extends Component {
-    constructor (props) {
+export default class App extends Component {
+    constructor(props) {
         super(props)
-        this.state = {
-            nouns: [],
-            adjectives: []
+        this.state={
+            form: {
+                noun: '',
+                adjective: '',
+                verb: ''
+            }
         }
     }
 
-    submitInput = () => {
-        const { nouns, adjectives} = this.state
-        nouns.push((document.getElementById('nouns').value))
-        this.setState({ nouns })
-        console.log(nouns);
+
+    submitInput = (input) => {
+        this.setState({ form: input})
+
     }
 
     render () {
-
         return (
             <div>
-                <h1>Hello!</h1>
+                <h1>Madlibs!</h1>
 
-                <Input nouns = { this.state.nouns } adjectives = { this.state.adjectives } submitInput = { this.submitInput }/>
+                <Input submitInput = { this.submitInput }/>
 
-                <Output nouns = { this.state.nouns } adjectives = { this.state.adjectives } />
+                <Output noun = {this.state.form.noun} adjective = {this.state.form.adjective} verb = {this.state.form.verb}/>
             </div>
         );
     }
 }
-
-export default App;
